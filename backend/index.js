@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const cors = require("cors");
 require('dotenv').config();
 
 const productRouter = require('./routes/productRoutes');
@@ -18,6 +19,12 @@ db.on('error', console.error.bind(console, 'MongoDB connection error =>'));
 db.once('open', () => {
     console.log('connected to database successfully!');
 })
+
+app.use(
+    cors({
+        origin: "*",
+    })
+)
 
 app.use(express.json());
 app.use(productRouter);
